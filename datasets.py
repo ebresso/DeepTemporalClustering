@@ -11,7 +11,7 @@ from tslearn.preprocessing import TimeSeriesScalerMeanVariance
 
 
 def load_data(dataset_name):
-    X = load_time_series_txt(args.dataset)
+    X = load_time_series_txt(dataset_name)
     y = None
     # preprocess data (standardization)
     X_scaled = TimeSeriesScalerMeanVariance().fit_transform(X)
