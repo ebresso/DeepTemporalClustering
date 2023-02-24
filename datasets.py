@@ -6,13 +6,12 @@ Dataset loading functions
 @author Emmanuel Bresso
 """
 
-import pandas as pd
-from tslearn.datasets import UCR_UEA_datasets
+from tslearn.utils import load_time_series_txt
 from tslearn.preprocessing import TimeSeriesScalerMeanVariance
 
 
 def load_data(dataset_name):
-    X = pd.read_csv(args.dataset, sep =",")
+    X = load_time_series_txt(args.dataset)
     y = None
     # preprocess data (standardization)
     X_scaled = TimeSeriesScalerMeanVariance().fit_transform(X)
