@@ -477,7 +477,7 @@ if __name__ == "__main__":
     parser.add_argument('--finetune_heatmap_at_epoch', default=8, type=int, help='epoch where heatmap finetuning starts')
     parser.add_argument('--initial_heatmap_loss_weight', default=0.1, type=float, help='initial weight of heatmap loss vs clustering loss')
     parser.add_argument('--final_heatmap_loss_weight', default=0.9, type=float, help='final weight of heatmap loss vs clustering loss (heatmap finetuning)')
-    parser.add_argument('--save_dir', default='results/tmp')
+    parser.add_argument('--save_dir', default='results')
     args = parser.parse_args()
     print(args)
 
@@ -539,4 +539,5 @@ if __name__ == "__main__":
         results['pur'] = cluster_purity(y_train, y_pred)
         results['nmi'] = metrics.normalized_mutual_info_score(y_train, y_pred)
         results['ari'] = metrics.adjusted_rand_score(y_train, y_pred)
-    print(results)
+    with open(f"{args.save_dir}/clusters.txt", "w") as clu:
+        clu.write("\n".join(y_pred))
