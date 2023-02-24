@@ -6,6 +6,7 @@ Dataset loading functions
 """
 
 import numpy as np
+import pandas as pd
 from tslearn.datasets import UCR_UEA_datasets
 from tslearn.preprocessing import TimeSeriesScalerMeanVariance
 from sklearn.preprocessing import LabelEncoder
@@ -16,6 +17,7 @@ all_ucr_datasets = ucr.list_datasets()
 
 
 def load_ucr(dataset='CBF'):
+    X_train = pd.read_csv(args.dataset, sep =",")
     X_train, y_train, X_test, y_test = ucr.load_dataset(dataset)
     X = np.concatenate((X_train, X_test))
     y = np.concatenate((y_train, y_test))

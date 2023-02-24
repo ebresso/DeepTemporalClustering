@@ -3,6 +3,7 @@ Implementation of the Deep Temporal Clustering model
 Main file
 
 @author Florent Forest (FlorentF9)
+@author Emmanuel Bresso
 """
 
 # Utilities
@@ -452,10 +453,10 @@ if __name__ == "__main__":
 
     # Parsing arguments and setting hyper-parameters
     parser = argparse.ArgumentParser(description='train', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--dataset', default='CBF', help='UCR/UEA univariate or multivariate dataset')
+    parser.add_argument('--dataset', help='univariate or multivariate csv dataset', required=True)
     #parser.add_argument('--validation', default=False, type=bool, help='use train/validation split')
     parser.add_argument('--ae_weights', default=None, help='pre-trained autoencoder weights')
-    parser.add_argument('--n_clusters', default=None, type=int, help='number of clusters')
+    parser.add_argument('--n_clusters', default=2, type=int, help='number of clusters')
     parser.add_argument('--n_filters', default=50, type=int, help='number of filters in convolutional layer')
     parser.add_argument('--kernel_size', default=10, type=int, help='size of kernel in convolutional layer')
     parser.add_argument('--strides', default=1, type=int, help='strides in convolutional layer')
@@ -486,10 +487,6 @@ if __name__ == "__main__":
 
     # Load data
     (X_train, y_train), (X_val, y_val) = load_data(args.dataset), (None, None)  # no train/validation split for now
-
-    # Find number of clusters
-    if args.n_clusters is None:
-        args.n_clusters = len(np.unique(y_train))
 
     # Set default values
     pretrain_optimizer = 'adam'
