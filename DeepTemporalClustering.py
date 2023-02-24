@@ -539,5 +539,5 @@ if __name__ == "__main__":
         results['pur'] = cluster_purity(y_train, y_pred)
         results['nmi'] = metrics.normalized_mutual_info_score(y_train, y_pred)
         results['ari'] = metrics.adjusted_rand_score(y_train, y_pred)
-    with open(f"{args.save_dir}/clusters.txt", "w") as clu:
-        clu.write("\n".join(y_pred))
+
+    np.savetxt(f"{args.save_dir}/clusters.txt", y_pred, delimiter=",")
